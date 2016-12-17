@@ -1,0 +1,37 @@
+---
+title: "import  Data from Web (corrected examples from book)"
+author: "Ilya Kochergin (example was borrowed from Springer book)"
+date: "16 12 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Введение 
+
+Примеры из книги 
+
+## Import from HTML Table 
+
+Исправленный пример  из пункта 1.2 (страница 6)
+
+```{r}
+u = "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population"
+library(XML)
+library(RCurl)
+webdoc <- getURL(u)  
+tbls <-  readHTMLTable(webdoc)
+str(tbls)
+sapply(tbls,nrow)
+```
+
+Указываем номер нужной нам таблицы в документе
+```{r}
+pop <-  readHTMLTable(webdoc, which = 1,stringsAsFactors=F)
+head(pop)
+str(pop)
+```
+
